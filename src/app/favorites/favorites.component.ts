@@ -18,7 +18,9 @@ export class FavoritesComponent implements OnInit {
   favorites$: Observable<Favorite[]>;
   dataSource = new MatTableDataSource([]);
   displayedColumns: string[] = ['columnOne', 'columnTwo', 'comment'];
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatSort, { static: false }) set matSort(sort: MatSort) {
+    this.dataSource.sort = sort;
+  }
 
   constructor(
     private store: Store<{ app: State }>,
@@ -29,7 +31,6 @@ export class FavoritesComponent implements OnInit {
       select(state => state.app.favorites),
       tap(favs => this.dataSource.data = favs)
     );
-    this.dataSource.sort = this.sort;
   }
 
   handleCommentSave(fav: Favorite, text: string) {

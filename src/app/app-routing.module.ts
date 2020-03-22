@@ -4,6 +4,7 @@ import { ProviderComponent } from './provider/provider.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'provider', pathMatch: 'full' },
   { path: 'provider', component: ProviderComponent },
   { path: 'favorites', component: FavoritesComponent },
 ];

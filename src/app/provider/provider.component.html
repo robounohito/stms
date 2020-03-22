@@ -6,10 +6,10 @@
 
   <mat-form-field>
     <mat-label>Select an option</mat-label>
-    <mat-select value="posts"
+    <mat-select [value]="state.currentProvider"
                 (selectionChange)="handleProviderSelect($event)">
-      <mat-option value="posts">Posts</mat-option>
-      <mat-option value="employees">Employees</mat-option>
+      <mat-option [value]="provider.posts">Posts</mat-option>
+      <mat-option [value]="provider.employees">Employees</mat-option>
     </mat-select>
   </mat-form-field>
 

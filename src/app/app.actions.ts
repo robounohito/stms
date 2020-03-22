@@ -1,5 +1,10 @@
 import { createAction, props } from '@ngrx/store';
 import { Entity, Favorite } from './app.reducer';
+import { Provider } from './app.reducer';
+
+export const load = createAction(
+  '[Provider] Load'
+);
 
 export const postsLoad = createAction(
   '[Provider] Posts Load'
@@ -7,7 +12,7 @@ export const postsLoad = createAction(
 
 export const loadSuccess = createAction(
   '[Provider] Load Success',
-  props<{ entities: Entity[], headers: string[], fields: string[] }>()
+  props<{ provider: Provider, entities: Entity[], headers: string[], fields: string[] }>()
 );
 
 export const entityCheck = createAction(

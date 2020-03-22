@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { State, Entity } from '../app.reducer';
+import { State, Entity, Provider } from '../app.reducer';
 import { Observable } from 'rxjs';
-import { postsLoad, entityCheck, employeesLoad } from '../app.actions';
+import { postsLoad, entityCheck, employeesLoad, load } from '../app.actions';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { tap, filter } from 'rxjs/operators';
@@ -19,6 +19,7 @@ export class ProviderComponent implements OnInit {
   state$: Observable<State>;
   dataSource = new MatTableDataSource([]);
   displayedColumns: string[] = ['checked', 'columnOne', 'columnTwo'];
+  provider = Provider;
   @ViewChild(MatPaginator, { static: false }) set matPaginator(paginator: MatPaginator) {
     this.dataSource.paginator = paginator;
   }
@@ -35,7 +36,7 @@ export class ProviderComponent implements OnInit {
       select(state => state.app),
       tap(state => this.dataSource.data = state.entities)
     );
-    this.store.dispatch(postsLoad());
+    this.store.dispatch(load());
   }
 
   handleCheckboxChange(post: Entity) {
@@ -43,7 +44,7 @@ export class ProviderComponent implements OnInit {
   }
 
   handleProviderSelect(event) {
-    if (event.value === 'employees') {
+    if (event.value === Provider.employees) {
       this.store.dispatch(employeesLoad());
     } else {
       this.store.dispatch(postsLoad());

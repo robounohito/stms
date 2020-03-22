@@ -1,8 +1,14 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { postsLoad, loadSuccess, entityCheck, saveComment, employeesLoad, } from './app.actions';
+import { postsLoad, loadSuccess, entityCheck, saveComment, employeesLoad, load, } from './app.actions';
+
+export enum Provider {
+  posts = 'posts',
+  employees = 'employees',
+}
 
 export interface State {
   loading: boolean;
+  currentProvider: Provider;
   entitiesHeaders: string[];
   entities: Entity[];
   favorites: Favorite[];
@@ -24,6 +30,7 @@ export interface Favorite {
 
 export const initialState: State = {
   loading: false,
+  currentProvider: Provider.posts,
   entitiesHeaders: [],
   entities: [],
   favorites: [],
@@ -33,15 +40,16 @@ const stateReducer = createReducer(
 
   initialState,
 
-  on(postsLoad, employeesLoad, state => {
+  on(load, postsLoad, employeesLoad, state => {
     return {
       ...state,
       loading: true,
     };
   }),
 
-  on(loadSuccess, (state, { entities, headers, fields }) => ({
+  on(loadSuccess, (state, { provider, entities, headers, fields }) => ({
     ...state,
+    currentProvider: provider,
     entitiesHeaders: headers,
     entities: entities.map(p => state.favorites.find(f => f.id === p.id)
       ? { ...p, columnOne: p[fields[0]], columnTwo: p[fields[1]], checked: true }

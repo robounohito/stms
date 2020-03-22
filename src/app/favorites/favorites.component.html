@@ -1,14 +1,15 @@
 <h2>Favorites</h2>
 
 <table mat-table
-       [attr.data-favs-async]="(favorites$ | async).length"
+       *ngIf="favorites$ | async"
        [dataSource]="dataSource"
        matSort
        class="mat-elevation-z8">
 
   <ng-container matColumnDef="columnOne">
     <th mat-header-cell
-        *matHeaderCellDef>
+        *matHeaderCellDef
+        mat-sort-header>
       Column One
     </th>
     <td mat-cell
