@@ -6,5 +6,5 @@ Run `npm start`
 
 Provided APIs don't work without API keys, so I used available free options.
 
-@Edo
-2 routes, 2 providers, collected favorites, variable column headers, material design, sorting, pagination, comments - hope I didn't miss anything important.
+@Edo:
+2 routes, 2 providers, collected favorites, variable column headers, checkboxes, material design, sorting, pagination, comments - hope I didn't miss anything important.
