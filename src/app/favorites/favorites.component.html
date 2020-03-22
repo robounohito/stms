@@ -1,0 +1,57 @@
+<h2>Favorites</h2>
+
+<table mat-table
+       [attr.data-favs-async]="(favorites$ | async).length"
+       [dataSource]="dataSource"
+       matSort
+       class="mat-elevation-z8">
+
+  <ng-container matColumnDef="columnOne">
+    <th mat-header-cell
+        *matHeaderCellDef>
+      Column One
+    </th>
+    <td mat-cell
+        *matCellDef="let element">
+      {{element.columnOne}}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="columnTwo">
+    <th mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header>
+      Column Two
+    </th>
+    <td mat-cell
+        *matCellDef="let element"> {{element.columnTwo}}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="comment">
+    <th mat-header-cell
+        *matHeaderCellDef>
+      Comment
+    </th>
+    <td mat-cell
+        *matCellDef="let element">
+      <mat-form-field>
+        <textarea matInput
+                  #textarea
+                  cdkTextareaAutosize
+                  cdkAutosizeMinRows="1"
+                  cdkAutosizeMaxRows="5">{{element.comment}}</textarea>
+      </mat-form-field>
+      <button mat-button
+              (click)="handleCommentSave(element, textarea.value)">
+        Save
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row
+      *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row
+      *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>

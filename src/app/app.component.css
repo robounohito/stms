@@ -1,0 +1,17 @@
+.container {
+  position: unset;
+}
+
+nav {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-item {
+  padding-top: 10px;
+}
+
+mat-drawer-content {
+  padding: 20px;
+}
